@@ -8,7 +8,13 @@ javaPlatform {
 
 dependencies {
     api(platform("com.spotify:scio-bom:0.14.9"))
+    api("com.spotify:scio-core_2.13:0.14.9")
     constraints {
+        api("com.spotify:scio-core_2.13") {
+            version {
+                strictly("0.14.9")
+            }
+        }
         api("com.github.bgalek.security.svg:safe-svg") {
             version {
                 // next line sets our own constraint, that is absent in scio-bom

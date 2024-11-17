@@ -8,6 +8,7 @@ dependencies {
     implementation("com.spotify:scio-redis_2.13") // overridden version from scio-bom but changed to ours (0.14.9 -> 0.14.7)
     implementation("args4j:args4j") // overridden version from scio-bom but changed to ours (2.33 -> 2.32)
     implementation("com.github.bgalek.security.svg:safe-svg") // custom version from our bom, no need to specify (1.1.4)
+    implementation("com.spotify:scio-core_2.13") // version from bom, no need to specify (0.14.9), will be overridden by our constraints
 }
 
 // just for demo purposes
