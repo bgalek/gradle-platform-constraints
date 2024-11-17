@@ -1,0 +1,7 @@
+[versions]
+scio = "0.14.9"
+
+[libraries]
+scio-bom = { group = "com.spotify", name = "scio-bom", version.ref = "scio" }
+scio-core = { group = "com.spotify", name = "scio-core_2.13", version.ref = "scio" }
+scio-test = { group = "com.spotify", name = "scio-test_2.13", version.ref = "scio" }
