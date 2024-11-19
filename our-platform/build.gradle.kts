@@ -17,11 +17,12 @@ val versionAware = configurations.create("versionAware") {
 }
 
 fun resolveVersion(group: String, name: String) = scalaTestAware
-    .resolvedConfiguration
-    .resolvedArtifacts
-    .first { it.moduleVersion.id.group == group && it.name == name }
-    .moduleVersion
-    .id
+    .incoming
+    .resolutionResult
+    .allDependencies
+    .filterIsInstance<ResolvedDependencyResult>()
+    .mapNotNull { it.selected.moduleVersion }
+    .first { it.group == group && it.name == name }
     .version
 
 dependencies {
@@ -36,11 +37,14 @@ dependencies {
     constraints {
         // make sure that all dependencies from the scio-core are strictly matching sci-core version
         versionAware
-            .resolvedConfiguration
-            .resolvedArtifacts
+            .incoming
+            .resolutionResult
+            .allDependencies
+            .filterIsInstance<ResolvedDependencyResult>()
+            .mapNotNull { it.selected.moduleVersion }
             .forEach {
-                api("${it.moduleVersion.id.group}:${it.moduleVersion.id.name}") {
-                    version { strictly(it.moduleVersion.id.version) }
+                api("${it.group}:${it.name}") {
+                    version { strictly(it.version) }
                 }
             }
 
